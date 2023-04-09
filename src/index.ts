@@ -126,7 +126,7 @@ async function run() {
 
   core.info(`slim on target: ${inputTarget}`);
 
-  await shell.exec('slim', ['b', '--target', inputTarget, '--continue-after', 'timeout'], {cwd: SLIM_PATH});
+  await shell.exec('slim', ['b', '--target', inputTarget, '--continue-after', '300000000000'], {cwd: SLIM_PATH});
 
   const data = fs.readFileSync(path.join(SLIM_PATH, 'slim.report.json'));
   const report = JSON.parse(data);
