@@ -129,7 +129,7 @@ function run() {
         const_1.core.debug('Downloading slim');
         yield get_slim();
         const_1.core.info(`slim on target: ${inputTarget}`);
-        yield const_1.shell.exec('slim', ['b', '--target', inputTarget], { cwd: SLIM_PATH });
+        yield const_1.shell.exec('slim', ['b', '--debug', '--verbose', '--target', inputTarget], { cwd: SLIM_PATH });
         const data = const_1.fs.readFileSync(const_1.path.join(SLIM_PATH, 'slim.report.json'));
         const report = JSON.parse(data);
         const_1.core.setOutput('report', report);
