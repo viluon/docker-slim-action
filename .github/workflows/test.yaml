@@ -3,9 +3,16 @@ name: docker-slim test
 on:
   push:
     branches:
-      - master
+      - 'master'
+      - '*dev'
     paths:
       - 'dist/*.js'
+  pull_request:
+    branches:
+      - '**'
+    paths:
+      - 'dist/*.js'
+  workflow_dispatch:
 
 env:
   IMAGE: "kitabisa/debian"

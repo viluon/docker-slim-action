@@ -48,11 +48,12 @@ The following input actions are supported:
 | Name        | Description                                                                      | Required? | Type    | Default |
 |-------------|----------------------------------------------------------------------------------|-----------|---------|---------|
 | `overwrite` | Overwrite target container image with slimmed version (only if target is not ID) | 🔴        | boolean | false   |
-| `tag`       | Specify a tag for slimmed target container image                                 | 🔴        | string  | slim    |
+| `tag`       | Specify a tag for slimmed target container image                                 | 🟢        | string  | slim    |
 | `target`    | Target container image (name or ID)                                              | 🟢        | string  |         |
 | `version`   | Define Slim version                                                              | 🔴        | string  |         |
 
-> **Warning**: Enabling the `overwrite` option will result in the replacement of the target image (original) with its slimmed version, regardless of the `tag` input.
+> [!CAUTION]
+> Enabling the `overwrite` option will result in the replacement of the target image (original) with its slimmed version, regardless of the `tag` input.
 
 <details>
   <summary>You can also control the behavior of the Slim build command by setting the following environment variables:</summary>
@@ -200,6 +201,9 @@ The following input actions are supported:
 | `DSLIM_HTTP_PROBE_API_SPEC` | Run HTTP probes for API spec |
 | `DSLIM_HTTP_PROBE_API_SPEC_FILE` | Run HTTP probes for API spec from file |
 </details>
+
+> [!IMPORTANT]
+> Please note that when you disable HTTP probing (either by setting **`DSLIM_HTTP_PROBE_OFF`** to **`true`** or **`DSLIM_HTTP_PROBE`** to **`false`**), it will effectively modify the behavior of the continue mode (if the **`DSLIM_CONTINUE_AFTER`** value is undefined) by imposing a timeout of **1** second. This adjustment occurs because, by default, when HTTP probes are disabled, the Slim's behavior will switch to '**enter**' mode — and there is no way to interact with the temporary container created by Slim within the GitHub Action runner.
 
 ## Outputs
 
